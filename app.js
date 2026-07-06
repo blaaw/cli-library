@@ -15,17 +15,15 @@ function addToLibrary(n, d, u, i) {
     );
 }
 
-
 addToLibrary("vim","Vim is a highly configurable modular text editor", "https://www.barbarianmeetscoding.com/boost-your-coding-fu-with-vscode-and-vim/cheatsheet", true)
 addToLibrary("nano","nano is a small, free and friendly editor", "https://linux.die.net/man/1/nano", false)
 addToLibrary("tmux","tmux is a free, open-source terminal multiplexer", "https://tmux.info/docs/cheatsheet", true)
 
-
-
-function showAllCLImain() {
+function refreshEntireMain() {
     document.querySelector("main").innerHTML = ""
     CLILibrary.forEach(CLI => {
-        createHtmlArticle(CLI.name, CLI.desciption, CLI.url , CLI.installed, CLI.remove, CLI.change)
+        let CLIArtcl = createHtmlArticle(CLI.name, CLI.desciption, CLI.url , CLI.installed, CLI.remove, CLI.change)
+        displayArticle(CLIArtcl)
     })
 }
 
@@ -52,8 +50,8 @@ function createHtmlArticle(n,d,u,i, rm, ch) {
     article.appendChild(instal);
     article.appendChild(btnRm);
     article.appendChild(btnCh);
-
-    displayArticle(article);
+    
+    return article;
 }
 
 function displayArticle(article) {
