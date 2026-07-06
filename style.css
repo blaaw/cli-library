@@ -4,7 +4,17 @@ article {
     width: fit-content;
     padding: 1rem;
 }
+form {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: fit-content;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid black;
+}
 main {
     padding: 1rem;
     display: flex;
+    gap: 1rem;
 }
