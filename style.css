@@ -1,0 +1,10 @@
+
+article {
+    border: 1px solid black;
+    width: fit-content;
+    padding: 1rem;
+}
+main {
+    padding: 1rem;
+    display: flex;
+}
