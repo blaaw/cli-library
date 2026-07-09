@@ -5,8 +5,9 @@ function CLI(name, desc, url, instal) {
     this.desciption = desc;
     this.url = url;
     this.installed = instal;
-    this.remove = "Remove From Library"
-    this.change = "Change Installed Status"
+    this.remove = "Remove From Library";
+    this.change = "Change Installed Status";
+    this.id = crypto.randomUUID();
 }
 
 function addToLibrary(n, d, u, i) {
@@ -18,12 +19,12 @@ function addToLibrary(n, d, u, i) {
 function refreshEntireMain() {
     document.querySelector("main").innerHTML = ""
     CLILibrary.forEach(CLI => {
-        let CLIArtcl = createHtmlArticle(CLI.name, CLI.desciption, CLI.url , CLI.installed, CLI.remove, CLI.change)
+        let CLIArtcl = createHtmlArticle(CLI.name, CLI.desciption, CLI.url , CLI.installed, CLI.remove, CLI.change, CLI.id)
         displayArticle(CLIArtcl)
     })
 }
 
-function createHtmlArticle(n,d,u,i, rm, ch) {
+function createHtmlArticle(n,d,u,i, rm, ch, id) {
     const article = document.createElement("article")
     const name = document.createElement("h3")
     const desc = document.createElement("p")
@@ -32,6 +33,7 @@ function createHtmlArticle(n,d,u,i, rm, ch) {
     const btnRm = document.createElement("button")
     const btnCh = document.createElement("button")
 
+    article.setAttribute('id',id)
     name.textContent = n
     desc.textContent = d
     a.setAttribute('href',u)
@@ -39,6 +41,10 @@ function createHtmlArticle(n,d,u,i, rm, ch) {
     instal.textContent = i ? "installed" : "not installed"
     btnRm.textContent = rm
     btnCh.textContent = ch
+
+    btnRm.addEventListener('click', function (){
+       removeArticle(id); 
+    });
 
     article.appendChild(name);
     article.appendChild(desc);
@@ -48,6 +54,14 @@ function createHtmlArticle(n,d,u,i, rm, ch) {
     article.appendChild(btnCh);
     
     return article;
+}
+
+function removeArticle(id) {
+    document.getElementById(id).remove();
+
+    const CLIindex = CLILibrary.findIndex(CLI => CLI.id === id);//necesary, if not it'll select a random, idk why (fuck js)
+    CLILibrary.splice(CLIindex, 1);
+    //console.log("after deletion: ", CLILibrary);
 }
 
 function displayArticle(article) {
