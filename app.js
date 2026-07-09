@@ -15,10 +15,6 @@ function addToLibrary(n, d, u, i) {
     );
 }
 
-addToLibrary("vim","Vim is a highly configurable modular text editor", "https://www.barbarianmeetscoding.com/boost-your-coding-fu-with-vscode-and-vim/cheatsheet", true)
-addToLibrary("nano","nano is a small, free and friendly editor", "https://linux.die.net/man/1/nano", false)
-addToLibrary("tmux","tmux is a free, open-source terminal multiplexer", "https://tmux.info/docs/cheatsheet", true)
-
 function refreshEntireMain() {
     document.querySelector("main").innerHTML = ""
     CLILibrary.forEach(CLI => {
@@ -59,19 +55,25 @@ function displayArticle(article) {
     main.appendChild(article)
 }
 
-/* trial new cli button, works
-document.getElementById("new-cli").addEventListener("click", function() {
-    must display form;
-    process y collect data from the form;
-    call addtoLibrary(form-data);
-    call showallCLImain();
-    display non form;
+const form = document.querySelector("form");
+form.style.display = 'none'; 
+function displayForm() {
+    if (form.style.display == 'none') {
+        form.style.display = 'flex'
+    } else {
+        form.style.display = 'none'
+    }
+}
+document.getElementById("new-cli").addEventListener("click", displayForm)
 
-    this create was for trial but i think ill just refresh page
-    createHtmlArticle("nuevo cli",
-        "hace algo en la terminal", 
-        "https://www.theodinproject.com/lessons/node-path-javascript-library",
-        false, 
-        "boton 1", 
-        "boton 2")
-})*/
+document.getElementById("form-btn").addEventListener("click", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("form-name").value;
+    const desc = document.getElementById("form-desc").value;
+    const url = document.getElementById("form-url").value;
+    const instal = document.getElementById("form-instal").value;
+
+    addToLibrary(name, desc, url, instal);
+    displayForm();
+    refreshEntireMain()  
+})
