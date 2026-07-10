@@ -67,9 +67,9 @@ function displayArticle(article) {
     main.appendChild(article)
 }
 
+const form = document.querySelector("form");
+form.style.display = 'none'; 
 function toogleDisplayForm() {
-    const form = document.querySelector("form");
-    form.style.display = 'none'; 
     if (form.style.display == 'none') {
         form.style.display = 'flex'
     } else {
