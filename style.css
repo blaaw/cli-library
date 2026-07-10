@@ -127,28 +127,28 @@ button:active {
     border-color: var(--green-dim);
 }
 
-#new-cli {
+.new-cli {
     color: var(--yellow);
 }
-#new-cli:hover {
+.new-cli:hover {
     background: var(--yellow);
     border-color: var(--yellow);
     color: var(--bg);
 }
 
-#remove-cli {
+.remove-cli {
     color: var(--red);
 }
-#remove-cli:hover {
+.remove-cli:hover {
     background: var(--red);
     border-color: var(--red);
     color: var(--bg);
 }
 
-#change-installed {
+.change-installed {
     color: var(--aqua);
 }
-#change-installed:hover {
+.change-installed:hover {
     background: var(--aqua);
     border-color: var(--aqua);
     color: var(--bg);

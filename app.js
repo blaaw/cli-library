@@ -41,6 +41,8 @@ function createHtmlArticle(n,d,u,i, rm, ch, id) {
     instal.textContent = i ? "installed" : "not installed"
     btnRm.textContent = rm
     btnCh.textContent = ch
+    btnRm.setAttribute('class','remove-cli')
+    btnCh.setAttribute('class','change-installed')
 
     btnRm.addEventListener('click', function (){
        removeArticle(id); 
