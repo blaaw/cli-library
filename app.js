@@ -82,7 +82,7 @@ function processFrom() {
     const name = document.getElementById("form-name").value;
     const desc = document.getElementById("form-desc").value;
     const url = document.getElementById("form-url").value;
-    const instal = document.getElementById("form-instal").value;
+    const instal = document.getElementById("form-instal").value === "true";//JAVASCRIIIII... it was reading a string without the equals true 
 
     addToLibrary(name, desc, url, instal);
 }
