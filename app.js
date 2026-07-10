@@ -45,6 +45,10 @@ function createHtmlArticle(n,d,u,i, rm, ch, id) {
     btnRm.addEventListener('click', function (){
        removeArticle(id); 
     });
+    btnCh.addEventListener('click', function (){
+       changeInstalledStatus(id); 
+    });
+
 
     article.appendChild(name);
     article.appendChild(desc);
@@ -56,14 +60,6 @@ function createHtmlArticle(n,d,u,i, rm, ch, id) {
     return article;
 }
 
-function removeArticle(id) {
-    document.getElementById(id).remove();
-
-    const CLIindex = CLILibrary.findIndex(CLI => CLI.id === id);//necesary, if not it'll select a random, idk why (fuck js)
-    CLILibrary.splice(CLIindex, 1);
-    //console.log("after deletion: ", CLILibrary);
-}
-
 function displayArticle(article) {
     const main = document.querySelector("main")
     main.appendChild(article)
@@ -71,23 +67,41 @@ function displayArticle(article) {
 
 const form = document.querySelector("form");
 form.style.display = 'none'; 
-function displayForm() {
+function toogleDisplayForm() {
     if (form.style.display == 'none') {
         form.style.display = 'flex'
     } else {
         form.style.display = 'none'
     }
 }
-document.getElementById("new-cli").addEventListener("click", displayForm)
+document.getElementById("new-cli").addEventListener("click", toogleDisplayForm)
 
-document.getElementById("form-btn").addEventListener("click", function(e) {
-    e.preventDefault();
+function processFrom() {
     const name = document.getElementById("form-name").value;
     const desc = document.getElementById("form-desc").value;
     const url = document.getElementById("form-url").value;
     const instal = document.getElementById("form-instal").value;
 
     addToLibrary(name, desc, url, instal);
-    displayForm();
+}
+
+document.getElementById("form-btn").addEventListener("click", function(e) {
+    e.preventDefault();
+    processFrom();
+    toogleDisplayForm();
     refreshEntireMain()  
 })
+
+function removeArticle(id) {
+    document.getElementById(id).remove();
+    //remove from array
+    const CLIindex = CLILibrary.findIndex(CLI => CLI.id === id);//necesary, if not it'll select a random element, idk why (fuck js)
+    CLILibrary.splice(CLIindex, 1);
+    //console.log("after deletion: ", CLILibrary);
+}
+
+function changeInstalledStatus(id) {
+    const CLI= CLILibrary.find(CLI => CLI.id === id);
+    CLI.installed = !CLI.installed;
+    refreshEntireMain();
+}
